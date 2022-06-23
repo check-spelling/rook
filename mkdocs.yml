@@ -3,6 +3,7 @@ docs_dir: Documentation/
 site_url: 'https://rook.io'
 repo_url: https://github.com/rook/rook
 edit_uri: edit/master/Documentation/
+
 site_author: Rook Authors
 site_description: "Rook Ceph Documentation"
 use_directory_urls: true
