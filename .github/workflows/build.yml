@@ -1,6 +1,6 @@
 name: Builds
 on:
-  pull_request:
+  push:
 
 defaults:
   run:
@@ -17,9 +17,11 @@ jobs:
           false
 
       - name: consider debugging
-        if: failure() && (github.repository_owner == "rook" || secrets.USE_WEBSHELL || github.run_attempt > 1)
+        if: failure()
         run: |
-          echo USE_TMATE=1 >> $GITHUB_ENV
+          if [ "$GITHUB_REPOSITORY_OWNER" = "rook" ] || [ -n "${{ secrets.USE_WEBSHELL }}" ] || [ "$GITHUB_RUN_ATTEMPT" -gt 1 ]; then
+            echo USE_TMATE=1 >> $GITHUB_ENV
+          fi
 
       - name: set up tmate session for debugging
         if: failure() && env.USE_TMATE
